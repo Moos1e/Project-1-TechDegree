@@ -23,4 +23,5 @@ Created by Jonathan Helmus
 
 import random
 
+#define number range
 number = random.randint(1, 20)
