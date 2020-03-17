@@ -25,3 +25,9 @@ import random
 
 #define number range
 number = random.randint(1, 20)
+
+#Game  Header
+
+
+
+#prompt user to take number
