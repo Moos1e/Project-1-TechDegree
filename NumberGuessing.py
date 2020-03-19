@@ -11,7 +11,7 @@ import random, time
 
 
 #Prompting the user for  their name
-name = raw_input("Please enter your name: ")
+name = input("Please enter your name: ")
 
 
 #Welcome intro to the game
@@ -35,8 +35,15 @@ def thinkingHello():
     print("*" * 20)
     print("\nPlease guess a number between 1 and 20.")
 
-
-
+#Function for numbers outside the scope of the game
+def scope():
+  while int(guess) < 1 or int(guess) > 20:
+    try:
+      raise ValueError
+      break
+    except ValueError:
+      print("The number you selected is not allowed in this game.\nPlease try another number")
+      return
 
 #The game!
 def start_game():
@@ -47,20 +54,24 @@ def start_game():
     guess = int()
 
     while guess != answer:
-        guess = input("\nPlease let me know your guess: ")
+      try:
+        guess = int(input("\nPlease let me know your guess: "))
         print("*" * 30)
-        #ValueError that stops that the game
-        if int(guess) < 1 or int(guess) > 20:
-            raise ValueError("The number you selected is not allowed in this game.\nPlease try another number")\
-        #If user guess the right answer
-        if guess == answer:
+        #Error for entering a sting
+      except ValueError:
+         print("The input was not a valid integer, please try again!\n")
+
+
+      #If user guess the right answer
+      if guess == answer:
             print("\nKA-CHING!!\nYou guessed the correct number!")
+
             print("*" * 30)
             #show users how many attempts they made to get the guess correct.
             print("It took you {} attempts to guess my secret number!".format(attempts + 1))
             continue
         #if user guesses to low
-        elif guess < answer:
+      elif guess < answer:
             print("Your guess is too low :-(")
             print("*" * 20)
             attempts += 1
@@ -68,7 +79,7 @@ def start_game():
             print("*" * 20)
             continue
         #if user guess too high!
-        else:
+      else:
             print("Your guess is too high :-(")
             print("*" * 20)
             attempts += 1
@@ -77,10 +88,12 @@ def start_game():
             continue
 
 
+
+
     #Prompting user if they would like to play again
     while True:
         print("\nWould you like to play again?\nPlease type 'yes' or 'no'\n")
-        again = raw_input("")
+        again = input("")
         if again.startswith('y' or 'Y'):
             start_game()
             break
@@ -94,5 +107,3 @@ if __name__ == '__main__':
     # Kick off the program by calling the start_game function.
 
     start_game()
-
-
